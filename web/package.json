@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "./node_modules/.bin/babel src --out-dir lib",
+    "start": "node ./lib/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.10",
-    "@babel/preset-env": "^7.17.10"
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7"
   }
 }

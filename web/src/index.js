@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const ReactDOMServer = require('react-dom/server');
 
-const react = require('react');
+const React = require('react');
 const Home = require('./containers/Home');
 
 app.get('/', (req, res) => {
@@ -17,7 +17,10 @@ app.get('/', (req, res) => {
   //     </body>
   //   </html>
   // `;
-  const content = ReactDOMServer.renderToString(<Home />);
+  const content = ReactDOMServer.renderToString(
+    <Home 
+    />
+  );
   res.send(content)
 })
 
