@@ -6,12 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "./node_modules/.bin/babel src --out-dir lib",
-    "start": "node ./lib/index.js"
+    "start": "node ./lib/index.js",
+    "dev": "npm run compile && npm run start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.21.1",
     "express": "^4.17.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-arrow-functions": "^7.16.7",
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7"
   }

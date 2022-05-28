@@ -12,7 +12,7 @@ const Home = props => {
       </h1>
       <div
         style={{
-          color: 'red',
+          color: 'blue',
         }}
       >
         hello, here is main content.
