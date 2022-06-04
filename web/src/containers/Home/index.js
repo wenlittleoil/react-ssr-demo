@@ -1,10 +1,16 @@
-const React = require('react');
+
+import React from 'react';
+
 const {
   useState,
+  useEffect,
 } = React;
 
 const Home = props => {
   const [num, setNum] = useState(0);
+  useEffect(() => {
+    console.log('component did mounted', 999);
+  }, []);
   return (
     <div>
       <h1>
@@ -30,4 +36,4 @@ const Home = props => {
   );
 }
 
-module.exports = Home;
+export default Home;

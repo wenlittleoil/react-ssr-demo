@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "./node_modules/.bin/babel src --out-dir lib",
-    "start": "node ./lib/index.js",
-    "dev": "npm run compile && npm run start"
+    "babel:dev": "npm run compile && node ./lib/index.js",
+    
+    "build:server": "webpack --config webpack.server.js",
+    "start:server": "nodemon dist/server.node.js",
+    "build:client": "webpack --config webpack.client.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +26,10 @@
     "@babel/core": "^7.17.10",
     "@babel/plugin-transform-arrow-functions": "^7.16.7",
     "@babel/preset-env": "^7.17.10",
-    "@babel/preset-react": "^7.16.7"
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.5",
+    "nodemon": "^2.0.16",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   }
 }
