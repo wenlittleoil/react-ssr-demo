@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "./node_modules/.bin/babel src --out-dir lib",
     "babel:dev": "npm run compile && node ./lib/index.js",
-    
     "build:server": "webpack --config webpack.server.js",
     "start:server": "nodemon dist/server.node.js",
     "build:client": "webpack --config webpack.client.js"
@@ -19,7 +18,8 @@
     "core-js": "^3.21.1",
     "express": "^4.17.3",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
