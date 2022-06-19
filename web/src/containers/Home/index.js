@@ -1,22 +1,29 @@
 
-import React from 'react';
-import { Link } from "react-router-dom";
-
-const {
+import React, {
   useState,
   useEffect,
-} = React;
+} from 'react';
+import { Link } from "react-router-dom";
+import { 
+  connect,
+  useSelector, 
+  useDispatch,
+} from 'react-redux'
 
 const Home = props => {
   const [num, setNum] = useState(0);
   useEffect(() => {
-    console.log('component did mounted', 999);
+    console.log('component did mounted on client browser');
   }, []);
+
+  const globalNum = useSelector((state) => state.num);
+  const dispatch = useDispatch();
   return (
     <div>
-      <h1>
+      <h1>global state num: {globalNum}</h1>
+      <h2>
         Home Page{num}
-      </h1>
+      </h2>
       <div
         style={{
           color: 'blue',
@@ -30,7 +37,7 @@ const Home = props => {
             setNum(num + 1);
           }}
         >
-          click me
+          add local page num
         </button>
       </div>
       <div>
@@ -39,5 +46,10 @@ const Home = props => {
     </div>
   );
 }
+
+// const mapStateToProps = state => ({
+//   num: state.num.value
+// })
+// export default connect(mapStateToProps)(Home);
 
 export default Home;

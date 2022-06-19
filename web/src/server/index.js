@@ -11,6 +11,12 @@ import {
   StaticRouter,
 } from "react-router-dom/server";
 import routes from '../routes';
+import Layout from '../containers/Layout';
+import {
+  Provider
+} from 'react-redux';
+import qs from 'qs';
+import getStore from '../store/getStore';
 
 const app = express()
 const port = 3000
@@ -18,15 +24,23 @@ const port = 3000
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
+  const params = qs.parse(req.query)
+  const initialNum = parseInt(params.initialNum, 10) || 0
+  const store = getStore(initialNum);
+  const initialState = store.getState();
   const App = () => {
     return (
-      <StaticRouter location={req.url}>
-        <Routes>
-          {routes.map(route => (
-            <Route {...route} />
-          ))}
-        </Routes>
-      </StaticRouter>
+      <Provider store={store}> 
+        <Layout>
+          <StaticRouter location={req.url}>
+            <Routes>
+              {routes.map(route => (
+                <Route {...route} />
+              ))}
+            </Routes>
+          </StaticRouter>
+        </Layout>
+      </Provider>
     );
   }
   const str = ReactDOMServer.renderToString(<App />);
@@ -37,10 +51,8 @@ app.get('*', (req, res) => {
       </head>
       <body>
         <div id="root">${str}</div>
-        ${
-          // ""
-          `<script src="/client.bundle.js"></script>`
-        }
+        <script>window.INITIAL_STATE = ${JSON.stringify(initialState)}</script>
+        <script src="/client.bundle.js"></script>
       </body>
     </html>
   `;
