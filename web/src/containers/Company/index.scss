@@ -1,0 +1,15 @@
+
+@import '@styles/common.scss';
+
+.company-intro {
+  @include main-shadow-box();
+  .about-us {
+    color: #323232;
+    font-size: 25px;
+    letter-spacing: 2px;
+    line-height: 60px;
+  }
+  p {
+    text-indent: 2em;
+  }
+}

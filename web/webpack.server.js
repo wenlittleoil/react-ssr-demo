@@ -1,12 +1,10 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
+const baseConfig = require('./webpack.base');
 
-module.exports = {
+// merge将创建一个全新对象，而不会影响到原有的baseConfig
+const serverConfig = merge(baseConfig, {
   target: 'node',
-  mode: 'development',
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/,
-  },
   entry: './src/server/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -15,18 +13,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-env',
-            ]
-          }
-        }
-      }
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          outputPath: 'images/',  // `${output.path}/images/`
+          filename: '[hash][ext][query]',
+          publicPath: 'http://localhost:3000/images/',
+          emit: false, // not emit assets in server side
+        },
+      },
     ],
   },
-}
+});
+
+console.log('serverConfig: ', serverConfig)
+
+module.exports = serverConfig;
+

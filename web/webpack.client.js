@@ -1,12 +1,9 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
+const baseConfig = require('./webpack.base');
 
-module.exports = {
+const clientConfig = merge(baseConfig, {
   target: 'web',
-  mode: 'development',
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/,
-  },
   entry: './src/client/index.js',
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -15,18 +12,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-env',
-            ]
-          }
-        }
-      }
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          outputPath: 'images/',  // `${output.path}/images/`
+          filename: '[hash][ext][query]',
+          publicPath: 'http://localhost:3000/images/',
+          emit: true, // emit assets in client side
+        },
+      },
     ],
   },
-}
+});
+
+console.log('clientConfig: ', clientConfig);
+
+module.exports = clientConfig;

@@ -1,0 +1,14 @@
+@import '@styles/constant.scss';
+
+@mixin main-shadow-box {
+  width: $main-width;
+  margin: 40px auto;
+  height: auto;
+  line-height: 30px;
+  padding: 40px;
+  background-color: #fff;
+  -webkit-box-shadow: #dadada 0px 0px 20px;
+  -moz-box-shadow: #DADADA 0px 0px 20px;
+  box-shadow: #dadada 0px 0px 20px;
+  font-size: 14px;
+}

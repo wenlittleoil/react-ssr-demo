@@ -8,41 +8,76 @@ import {
   connect,
   useSelector, 
   useDispatch,
-} from 'react-redux'
+} from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import { getCls } from '@utils/style';
+import style from './index.scss';
+import styleNative from './index.native.scss';
+import cates from '@/data/product';
+
+// 当前webpack环境不支持swiper第三方css方案
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { Autoplay, Pagination, Navigation } from "swiper";
+
+import banner1 from './imgs/banner01.jpeg';
+import banner2 from './imgs/banner02.jpeg';
+import banner3 from './imgs/banner03.jpeg';
+import ProductCates from '@components/ProductCates';
+
+const swiperList = [
+  {
+    src: banner1,
+    key: '1',
+  },
+  {
+    src: banner2,
+    key: '2',
+  },
+  {
+    src: banner3,
+    key: '3',
+  },
+];
+
+
 
 const Home = props => {
-  const [num, setNum] = useState(0);
-  useEffect(() => {
-    console.log('component did mounted on client browser');
-  }, []);
 
   const globalNum = useSelector((state) => state.num);
   const dispatch = useDispatch();
   return (
-    <div>
-      <h1>global state num: {globalNum}</h1>
-      <h2>
-        Home Page{num}
-      </h2>
-      <div
-        style={{
-          color: 'blue',
+    <div className={getCls(style, 'home-wrapper')}>
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
         }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
       >
-        hello, here is main content.
-      </div>
-      <div>
-        <button 
-          onClick={() => {
-            setNum(num + 1);
-          }}
-        >
-          add local page num
-        </button>
-      </div>
-      <div>
-        <Link to={"/login"}>to login</Link>
-      </div>
+        {swiperList.map(item => (
+          <SwiperSlide key={item.key}>
+            <img 
+              src={item.src} 
+              className="swiper-item-pic"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <ProductCates 
+        title="产品与解决方案亮点"
+        cates={cates}
+      />
     </div>
   );
 }
@@ -52,4 +87,4 @@ const Home = props => {
 // })
 // export default connect(mapStateToProps)(Home);
 
-export default Home;
+export default withStyles(style, styleNative)(Home);

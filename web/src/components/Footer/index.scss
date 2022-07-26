@@ -1,0 +1,36 @@
+@import '@styles/constant.scss';
+
+.footer {
+  width: $main-width;
+  padding: 40px 0;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .company-name {
+    .cn-name {
+      font-weight: bold;
+      FONT-SIZE: 25px;
+    }
+    .en-name {
+      line-height: 30px;
+      font-size: 14px;
+      color: #333;
+      padding-top: 10px;
+    }
+  }
+  .contact {
+    line-height: 25px;
+  }
+  .qrcode {
+    width: 120px;
+    height: 120px;
+    background-image: url('./imgs/qrcode.jpeg');
+    background-size: 100% 100%;
+  }
+  .company-logo {
+    width: 250px;
+    height: 48px;
+    background: url(./imgs/company-logo.png) 100% 100%;
+  }
+}

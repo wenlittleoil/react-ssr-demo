@@ -1,0 +1,22 @@
+@import '@styles/constant.scss';
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  .tab-list {
+    width: $main-width;
+    margin: auto;
+    display: flex;
+    .tab-item {
+      display: block;
+      height: $header-height;
+      line-height: $header-height;
+      padding: 0 40px;
+      &:hover {
+        background-color: #333;
+        color: #fff;
+      }
+    }
+  }
+}

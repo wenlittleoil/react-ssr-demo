@@ -1,0 +1,12 @@
+.mySwiper {
+  .swiper-wrapper {
+    display: flex;
+    .swiper-slide {
+      flex-shrink: 0;
+      .swiper-item-pic {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

@@ -7,16 +7,17 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import StyleContext from 'isomorphic-style-loader/StyleContext'
 import { 
   StaticRouter,
 } from "react-router-dom/server";
-import routes from '../routes';
-import Layout from '../containers/Layout';
+import routes from '@/routes';
+import Layout from '@containers/Layout';
 import {
   Provider
 } from 'react-redux';
 import qs from 'qs';
-import getStore from '../store/getStore';
+import getStore from '@store/getStore';
 
 const app = express()
 const port = 3000
@@ -24,22 +25,33 @@ const port = 3000
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
+  // handle dynamic store in ssr
   const params = qs.parse(req.query)
   const initialNum = parseInt(params.initialNum, 10) || 0
   const store = getStore(initialNum);
   const initialState = store.getState();
+
+  // handle css in ssr
+  const css = new Set(); // CSS for all rendered React components
+  const insertCss = (...styles) => styles.forEach(style => {
+    const cssContent = style._getContent().default[0][1]; // 经过isomorphic-style-loader处理后的数据结构
+    css.add(cssContent);
+  });
+
   const App = () => {
     return (
-      <Provider store={store}> 
-        <Layout>
+      <Provider store={store}>
+        <StyleContext.Provider value={{ insertCss }}>
           <StaticRouter location={req.url}>
-            <Routes>
-              {routes.map(route => (
-                <Route {...route} />
-              ))}
-            </Routes>
+            <Layout>
+              <Routes>
+                {routes.map(route => (
+                  <Route {...route} />
+                ))}
+              </Routes>
+            </Layout>
           </StaticRouter>
-        </Layout>
+        </StyleContext.Provider>
       </Provider>
     );
   }
@@ -48,6 +60,10 @@ app.get('*', (req, res) => {
     <html>
       <head>
         <title>ssr example</title>
+        <!-- <link href="/main.css" rel="stylesheet"></link> -->
+        <style>
+          ${[...css].join('\n')}
+        </style>
       </head>
       <body>
         <div id="root">${str}</div>
@@ -56,10 +72,12 @@ app.get('*', (req, res) => {
       </body>
     </html>
   `;
-  res.send(content)
-})
+  res.send(content);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
 
