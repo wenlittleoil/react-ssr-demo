@@ -36,6 +36,7 @@ app.get('*', (req, res) => {
   const insertCss = (...styles) => styles.forEach(style => {
     const cssContent = style._getContent().default[0][1]; // 经过isomorphic-style-loader处理后的数据结构
     css.add(cssContent);
+    console.log('[服务端插入样式成功]:', cssContent);
   });
 
   const App = () => {
@@ -61,7 +62,7 @@ app.get('*', (req, res) => {
       <head>
         <title>ssr example</title>
         <!-- <link href="/main.css" rel="stylesheet"></link> -->
-        <style>
+        <style id="inline-style">
           ${[...css].join('\n')}
         </style>
       </head>

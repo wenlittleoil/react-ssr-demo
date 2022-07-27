@@ -1,10 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-console.log('process.env.NODE_ENV:---', process.env.NODE_ENV)
+const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log('process.env.NODE_ENV:---', NODE_ENV);
 
 module.exports = {
-  mode: 'development',
+  mode: NODE_ENV,
   watch: true,
   watchOptions: {
     ignored: /node_modules/,
@@ -55,7 +56,9 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: "[path][name]__[local]__[hash:base64:5]",
+                localIdentName: NODE_ENV === 'development' ?
+                  "[path][name]__[local]__[hash:base64:5]" :
+                  "[hash:base64:4]",
               },
             }
           },

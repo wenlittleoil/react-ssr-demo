@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import StyleContext from 'isomorphic-style-loader/StyleContext'
+// import nativeInsertCss from 'isomorphic-style-loader/insertCss';
 import routes from '@/routes';
 import Layout from '@containers/Layout';
 import {
@@ -17,7 +18,18 @@ const initialState = window.INITIAL_STATE;
 const store = getStore(initialState.num);
 
 const insertCss = (...styles) => {
-  const removeCss = styles.map(style => style._insertCss());
+  const removeCss = styles.map(style => {
+    const cssContent = style._getContent().default[0][1];
+    const styleEle = document.querySelector('#inline-style');
+    const curStyleText = styleEle.textContent;
+    if (!curStyleText.includes(cssContent)) {
+      styleEle.textContent = curStyleText + cssContent;
+      console.log('[客户端插入样式成功]:', cssContent);
+    }
+
+    // 不起作用，可删掉该行？
+    return style._insertCss();
+  });
   return () => removeCss.forEach(dispose => dispose());
 }
 

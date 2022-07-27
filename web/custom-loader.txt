@@ -23,7 +23,7 @@
     }
   
 
-    // custom-loader: simplify-get-cls-loader
+    // custom webpack loader: simplify-get-cls-loader
     var cssLocals = exports._getContent().default.locals;
     if (typeof cssLocals === 'object') {
       // 将css类名映射直接注入到导出对象中
