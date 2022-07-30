@@ -1,6 +1,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const CONFIG = require('./config');
 
 // merge将创建一个全新对象，而不会影响到原有的baseConfig
 const serverConfig = merge(baseConfig, {
@@ -18,7 +19,7 @@ const serverConfig = merge(baseConfig, {
         generator: {
           outputPath: 'images/',  // `${output.path}/images/`
           filename: '[hash][ext][query]',
-          publicPath: 'http://localhost:3000/images/',
+          publicPath: `${CONFIG.PUBLIC_PATH}/images/`,
           emit: false, // not emit assets in server side
         },
       },

@@ -1,12 +1,11 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-console.log('process.env.NODE_ENV:---', NODE_ENV);
 
 module.exports = {
   mode: NODE_ENV,
-  watch: true,
+  watch: NODE_ENV === 'development',
   watchOptions: {
     ignored: /node_modules/,
   },

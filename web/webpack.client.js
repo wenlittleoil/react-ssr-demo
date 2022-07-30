@@ -1,6 +1,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const CONFIG = require('./config');
 
 const clientConfig = merge(baseConfig, {
   target: 'web',
@@ -17,7 +18,7 @@ const clientConfig = merge(baseConfig, {
         generator: {
           outputPath: 'images/',  // `${output.path}/images/`
           filename: '[hash][ext][query]',
-          publicPath: 'http://localhost:3000/images/',
+          publicPath: `${CONFIG.PUBLIC_PATH}/images/`,
           emit: true, // emit assets in client side
         },
       },

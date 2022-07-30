@@ -8,6 +8,7 @@ import {
 
 export default function Login() {
   let [searchParams, setSearchParams] = useSearchParams();
+  console.log('[process.env.NODE_ENV]:', process.env.NODE_ENV, 666);
   return (
     <div>
       <h1>here is login page</h1>
