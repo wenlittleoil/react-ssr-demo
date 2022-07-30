@@ -1,11 +1,30 @@
 import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-
 import style from './index.scss';
 import ProductCates from '@components/ProductCates';
+import ProductList from '@components/ProductList';
+import ProductInfo from '@components/ProductInfo';
 import cates from '@/data/product';
 
-const Product = props => {
+export const ProdDetail = props => {
+  useStyles(style);
+  return (
+    <div className={style['prod-detail']}>
+      <ProductInfo />
+    </div>
+  );
+}
+
+export const CategoryDetail = props => {
+  useStyles(style);
+  return (
+    <div className={style['category-detail']}>
+      <ProductList />
+    </div>
+  );
+}
+
+export const ProductCatory = props => {
   useStyles(style);
   return (
     <div className={style['product']}>
@@ -17,4 +36,4 @@ const Product = props => {
   );
 }
 
-export default Product;
+export default ProductCatory;

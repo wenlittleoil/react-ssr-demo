@@ -1,0 +1,30 @@
+
+.product-info {
+  .name {
+    border-bottom: #c7d1de 0px solid;
+    padding-bottom: 10px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin: 0px 0px 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    color: #476692;
+    font-size: 20px;
+    padding-top: 2px;
+    text-align: center;
+  }
+  .main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .pic {
+      width: 630px;
+      height: auto;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+    .desc {
+      margin-left: 20px;
+    }
+  }
+}

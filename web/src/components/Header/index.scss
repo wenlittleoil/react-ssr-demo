@@ -4,6 +4,9 @@
   position: fixed;
   top: 0;
   width: 100%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+  font-size: 15px;
   .tab-list {
     width: $main-width;
     margin: auto;

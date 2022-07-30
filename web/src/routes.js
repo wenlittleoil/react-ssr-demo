@@ -1,9 +1,25 @@
 import React from "react";
+import {
+  Outlet,
+  Routes,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import Home from './containers/Home';
 import Login from './containers/Login';
 import NoMatch from './containers/NoMatch';
 import Company from './containers/Company';
-import Product from './containers/Product';
+import {
+  ProductCatory,
+  CategoryDetail,
+  ProdDetail,
+} from './containers/Product';
+
+const CategoryRouteWrap = () => <Outlet />;
+const ProductRouteWrap = () => <Outlet />;
+
 
 const routes = [
   {
@@ -18,11 +34,22 @@ const routes = [
   },
   {
     path: '/product',
-    element: <Product />,
+    element: <CategoryRouteWrap />,
     key: 'product',
+    children: (
+      <>
+        <Route index element={<ProductCatory />} />
+        <Route path=":cateId" element={<ProductRouteWrap />}>
+          <Route index element={<CategoryDetail />} />
+          <Route path=":prodId" element={<ProdDetail />} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
+        <Route path="*" element={<NoMatch />} />
+      </>
+    ),
   },
   {
-    path: 'login',
+    path: 'login/*',
     element: <Login />,
     key: 'login',
   },

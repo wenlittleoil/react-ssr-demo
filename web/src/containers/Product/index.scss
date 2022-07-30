@@ -1,5 +1,7 @@
 @import '@styles/common.scss';
 
-.product {
+.product, 
+.prod-detail, 
+.category-detail {
   @include main-shadow-box();
 }

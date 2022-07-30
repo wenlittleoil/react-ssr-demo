@@ -1,0 +1,21 @@
+
+.product-list-wrap {
+  .title {
+    line-height: 60px;
+    color: #323232;
+    font-size: 25px;
+    letter-spacing: 2px;
+  }
+  .prods {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .prod-item {
+      width: 332px;
+      margin: 0 12px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      cursor: pointer;
+    }
+  }
+}
